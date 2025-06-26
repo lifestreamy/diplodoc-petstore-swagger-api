@@ -2,7 +2,9 @@ const fs = require('fs');
 const path = require('path');
 const {execSync} = require('child_process');
 
-const chokidar = require('chokidar'); 
+const HOST = process.env.HOST || 'localhost';
+
+const chokidar = require('chokidar');
 const express = require('express');
 const serveStatic = require('serve-static');
 
@@ -61,7 +63,7 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
     this.configure();
   }
 
-  // configure server  
+  // configure server
   configure() {
     this.app = express();
     this.app.use(serveStatic(this.configs.serveDir, {
@@ -95,7 +97,7 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
     // - notify client with reload event
     watcher.on('all', debounce((event, path) => {
       console.info(`event: ${event}, path: ${path}`);
-      
+
       try {
         this.buildDocumentation.call(this);
       } catch (err) {
@@ -119,7 +121,7 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
 
     const pattern = path.join(this.configs.serveDir, '**', '*.html');
     const paths = glob.globSync(pattern, {ignore: 'node_modules/**'}).map(p => path.join(process.cwd(), p));
-  
+
     for (const path of paths) {
       try {
         const html = fs.readFileSync(path, 'utf8');
@@ -156,12 +158,12 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
 
   // start up server
   listen() {
-    this.app.listen(this.configs.port);
+    this.app.listen(this.configs.port, HOST);
 
-    console.info(`serving on: http://0.0.0.0:${this.configs.port}/ru/index.html`);
+    console.info(`serving on: http://${HOST}:${this.configs.port}/ru/index.html`);
 
     if (this.configs.autoOpen) {
-        open(`http://0.0.0.0:${this.configs.port}/ru/index.html`);
+        open(`http://${HOST}:${this.configs.port}/ru/index.html`);
     }
 }
 }
