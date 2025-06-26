@@ -2,7 +2,12 @@
 name: Build Docs and Deploy static content to Pages
 
 on:
-  # For now only run this workflow manually from the Actions tab
+  # Preview your deployment before merging into main
+  pull_request:          
+    branches: [ main ] # PRs into main generate previews with random link (for testing)
+  push:
+    branches: [ main ] # If PR is accepted, run the workflow
+  # For running the workflow manually from the Actions tab
   workflow_dispatch:
 
 # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
