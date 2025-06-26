@@ -31,7 +31,7 @@ jobs:
       - run: npm run build:docs  # Produces docs-html/ by running the script in package.json (yfm --input docs --output docs-html)
     
       # Upload the result as an artifact for the next job to use and deploy
-      - uses: actions/upload-pages-artifact@v4
+      - uses: actions/upload-pages-artifact@v3
         with:
           path: docs-html
           
