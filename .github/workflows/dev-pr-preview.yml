@@ -1,0 +1,33 @@
+name: PR Preview from dev
+
+on:
+  pull_request:
+    branches: [ main ] 
+    types: [opened, synchronize, reopened, ready_for_review] 
+
+jobs:
+  preview:
+    if: github.head_ref == 'dev' # Only run if the PR is from dev branch
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - run: npm ci
+      - run: npm run build:docs
+
+      - name: Deploy PR Preview
+        uses: rajyan/preview-pages@v1
+        with:
+          source-dir: docs-html 
