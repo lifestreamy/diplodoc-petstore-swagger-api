@@ -1,4 +1,4 @@
 title: Swagger Pet Store API
 links:
-  - title: openapi
-    href: swagger/
+  - title: documentation
+    href: index.yaml
