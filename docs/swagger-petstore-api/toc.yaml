@@ -1,0 +1,10 @@
+title: API Reference
+href: index.yaml
+items:
+  - name: openapi
+    include:
+      path: openapi
+      includers:
+        - name: openapi
+          input: swagger-petstore-api/petstore-api-draft.yaml
+      mode: link
