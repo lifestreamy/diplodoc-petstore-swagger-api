@@ -6,6 +6,9 @@ info:
     name: MIT
 servers:
   - url: http://petstore.swagger.io/v1
+    description: Main API endpoint
+  - url: https://petstore3.swagger.io/api/v3
+    description: \"Test\" server (placeholder), latest accessible version of API with OpenApi 3.0 spec.
 paths:
   /pets:
     get:
