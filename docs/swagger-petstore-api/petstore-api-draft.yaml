@@ -80,6 +80,10 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/Pet'
+        '400':
+          description: 'Bad Request'
+        '404':
+          description: 'Not Found'
         default:
           description: unexpected error
           content:
@@ -117,4 +121,3 @@ components:
           format: int32
         message:
           type: string
-
