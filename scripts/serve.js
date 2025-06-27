@@ -3,6 +3,7 @@ const path = require('path');
 const {execSync} = require('child_process');
 
 const HOST = process.env.HOST || 'localhost';
+const serve_on = '/swagger-petstore-api/index.html';
 
 const chokidar = require('chokidar');
 const express = require('express');
@@ -72,7 +73,7 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
     }));
     this.app.get(this.configs.ssePath, this.sseRequestHandler.bind(this));
     this.app.get('/', (req, res) => {
-      res.redirect('/ru/index.html');
+      res.redirect(serve_on);
     });
     this.sseResponseMessage = `event: ${this.configs.sseEventName}\ndata: ${this.configs.sseEventMessage}\n\n`;
 
@@ -160,10 +161,10 @@ events.addEventListener("${this.configs.sseEventName}", function(e) {
   listen() {
     this.app.listen(this.configs.port, HOST);
 
-    console.info(`serving on: http://${HOST}:${this.configs.port}/ru/index.html`);
+    console.info(`serving on: http://${HOST}:${this.configs.port}${serve_on}`);
 
     if (this.configs.autoOpen) {
-        open(`http://${HOST}:${this.configs.port}/ru/index.html`);
+        open(`http://${HOST}:${this.configs.port}${serve_on}`);
     }
 }
 }
