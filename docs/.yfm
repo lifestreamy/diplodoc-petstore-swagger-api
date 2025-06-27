@@ -2,3 +2,5 @@ langs: ['en']
 
 docs-viewer:
   langs: ['en']
+
+allowHTML: true
